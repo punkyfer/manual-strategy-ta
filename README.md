@@ -12,7 +12,7 @@
 
 **5.** (Optional) We run the genetic algorithm with the testing dataset to determine how much weight we should assign to the different parameters (rsi, macd, trend lines, candlestick patterns, ...) used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
 
-**6.** Based on the training data, the different parameters and their respective weights we generate a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
+**6.** Based on the training data, the different parameters and their respective weights it generates a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
 
 **7.** Finally we run the market simulator with the portfolio created and the benchmark, both with the training dataset (InSample) and the testing dataset (OutSample) to compare their performance
 
