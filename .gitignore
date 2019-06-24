@@ -1,2 +1,5 @@
 # ignore all keys
 *.key
+
+# ignore pyc files
+*.pyc
