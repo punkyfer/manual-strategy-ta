@@ -8,7 +8,7 @@
 
 **3.** We select a stock and a date range for the testing dataset
 
-**4.** An empty portfolio and a benchmark portfolio are then created for comparison, the benchmark portfolio buys all the stock it can on the start date and sells it on the end date of the dataset
+**4.** An empty portfolio and a benchmark portfolio are then created for comparison, the benchmark portfolio buys 1000 of the stock on the start date and sells it on the end date of the dataset
 
 **5.** (Optional) We run the genetic algorithm with the testing dataset to determine how much weight we should assign to the different parameters (rsi, macd, trend lines, candlestick patterns, ...) used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
 
