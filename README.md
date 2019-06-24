@@ -4,15 +4,17 @@
 
 **1.** First we choose the starting amount of money for the simulation
 
-**2.** We select a stock and a date range (you can choose from the available datasets or add your own to /Data)
+**2.** We select a stock and a date range for the training dataset (you can choose from the available datasets or add your own to /Data)
 
-**3.** We create an empty portfolio and a benchmark portfolio is then created for comparison, this portfolio buys all the stock it can on the start date and sells it on the end date
+**3.** We select a stock and a date range for the testing dataset
 
-**4.** (Optional) We run the genetic algorithm to determine how much weight we should assign to the different parameters used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
+**3.** We create an empty portfolio and a benchmark portfolio is then created for comparison, this portfolio buys all the stock it can on the start date and sells it on the end date of the testing dataset
 
-**5.** Based on the different parameters and their respective weights we generate a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
+**4.** (Optional) We run the genetic algorithm with the testing dataset to determine how much weight we should assign to the different parameters (rsi, macd, trend lines, candlestick patterns, ...) used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
 
-**6.** Finally we run the market simulator with the portfolio created and the benchmark to compare their performance
+**5.** Based on the training data, the different parameters and their respective weights we generate a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
+
+**6.** Finally we run the market simulator with the portfolio created and the benchmark, both with the training dataset (InSample) and the testing dataset (OutSample) to compare their performance
 
 
 ### Dependencies
@@ -36,6 +38,6 @@
 
 **Manual Strategy Tick to Tick:** works ver similar to **Manual Strategy** but instead of receiving a complete dataset it receives a **Fake Ticker** and reads the data tick by tick
 
-**Marketsim:** receives the generated portfolio and the benchmarkk and it computes different statistics for both portfolios (*sharpe ratio*, *cumulative return*, *standard deviation*, ...) to compare them
+**Marketsim:** receives the generated portfolio and the benchmark and it computes different statistics for the portfolios (*sharpe ratio*, *cumulative return*, *standard deviation*, ...), for both the training and testing dataset
 
 **Trendy:** is used to find and (optionally) plot support, resistance and trend lines for a given dataset
