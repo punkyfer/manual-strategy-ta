@@ -8,13 +8,13 @@
 
 **3.** We select a stock and a date range for the testing dataset
 
-**3.** We create an empty portfolio and a benchmark portfolio is then created for comparison, this portfolio buys all the stock it can on the start date and sells it on the end date of the testing dataset
+**4.** an empty portfolio and a benchmark portfolio are then created for comparison, the benchmark portfolio buys all the stock it can on the start date and sells it on the end date of the dataset
 
-**4.** (Optional) We run the genetic algorithm with the testing dataset to determine how much weight we should assign to the different parameters (rsi, macd, trend lines, candlestick patterns, ...) used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
+**5.** (Optional) We run the genetic algorithm with the testing dataset to determine how much weight we should assign to the different parameters (rsi, macd, trend lines, candlestick patterns, ...) used to determine the BUY/HOLD/SELL signals, if not using the genetic algorithm, all parameters are weighted equally
 
-**5.** Based on the training data, the different parameters and their respective weights we generate a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
+**6.** Based on the training data, the different parameters and their respective weights we generate a series of trade orders (BUY/HOLD/SELL) to maximize portfolio return
 
-**6.** Finally we run the market simulator with the portfolio created and the benchmark, both with the training dataset (InSample) and the testing dataset (OutSample) to compare their performance
+**7.** Finally we run the market simulator with the portfolio created and the benchmark, both with the training dataset (InSample) and the testing dataset (OutSample) to compare their performance
 
 
 ### Dependencies
