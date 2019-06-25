@@ -1,5 +1,7 @@
 ## Trading Bot Simulator
 
+Run *interface.py* to open a terminal interface
+
 ### How does it work?
 
 **1.** First we choose the starting amount of money for the simulation
@@ -41,3 +43,5 @@
 **Marketsim:** receives the generated portfolio and the benchmark and it computes different statistics for the portfolios (*sharpe ratio*, *cumulative return*, *standard deviation*, ...), for both the training and testing dataset
 
 **Trendy:** is used to find and (optionally) plot support, resistance and trend lines for a given dataset
+
+**Interface:** Rudimentary console interface to choose simulation parameters and run it
