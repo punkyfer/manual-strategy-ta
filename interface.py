@@ -9,7 +9,6 @@ import GeneticAlgorithm as ga
 import ManualStrategy as ms
 import ManualStrategyTicktoTick as mst
 
-# TODO NOW: Fix marketsim error when called from interface
 # TODO: Implement genetic algorithm selected case
 # TODO: Make amount bought by benchmark relative to the start_val
 # TODO: Remove duplicate code (mostly date error checking)
@@ -18,36 +17,44 @@ import ManualStrategyTicktoTick as mst
 if __name__ == "__main__":
     
     start_val=int(input("Choose initial ammount of funds (eg. 100000): "))
+    print()
     
     stock_dict = util.get_stocks()
     stock_list = list(stock_dict.keys())
+    print ("TRAINING DATASET")
 
-    print ("Choose stocks and dates for the training dataset")
+    print ("Choose stock")
 
     for i, sname in enumerate(stock_list):
         print ("{}. {}".format(i, sname))
 
     tr_symbol_ind = int(input("Choose a symbol (0-{}): ".format(len(stock_list)-1)))
     tr_symbol = stock_list[tr_symbol_ind]
-        
+    
+    print()
+
     #In-sample period
     sdate, edate = util.get_dates(stock_dict[tr_symbol])
     print ("Choose dates from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
+
     tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
     while tmp[0]<sdate.year or tmp[0]>edate.year or tmp[1]<1 or tmp[1]>12 or tmp[2]<1 or tmp[2]>31:
         print ("Choose a valid date from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
         tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
     tr_sdate = dt.datetime(tmp[0], tmp[1], tmp[2])
 
-    tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
+    tmp = [int(x) for x in input("Choose end date (year/month/day): ").split('/')]
     while tmp[0]<sdate.year or tmp[0]>edate.year or tmp[1]<1 or tmp[1]>12 or tmp[2]<1 or tmp[2]>31:
         print ("Choose a valid date from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
-        tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
+        tmp = [int(x) for x in input("Choose end date (year/month/day): ").split('/')]
     tr_edate = dt.datetime(tmp[0], tmp[1], tmp[2])
 
     tr_dates = [tr_sdate, tr_edate]
 
-    print ("Choose stocks and dates for the testing dataset")
+    print()
+
+    print ("TESTING DATASET")
+    print ("Choose stock")
 
     for i, sname in enumerate(stock_list):
         print ("{}. {}".format(i, sname))
@@ -58,20 +65,22 @@ if __name__ == "__main__":
     #Out-sample period
     sdate, edate = util.get_dates(stock_dict[ts_symbol])
     print ("Choose dates from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
+
     tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
     while tmp[0]<sdate.year or tmp[0]>edate.year or tmp[1]<1 or tmp[1]>12 or tmp[2]<1 or tmp[2]>31:
         print ("Choose a valid date from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
         tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
     ts_sdate = dt.datetime(tmp[0], tmp[1], tmp[2])
 
-    tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
+    tmp = [int(x) for x in input("Choose end date (year/month/day): ").split('/')]
     while tmp[0]<sdate.year or tmp[0]>edate.year or tmp[1]<1 or tmp[1]>12 or tmp[2]<1 or tmp[2]>31:
         print ("Choose a valid date from {:%Y/%m/%d} to {:%Y/%m/%d}".format(sdate, edate))
-        tmp = [int(x) for x in input("Choose start date (year/month/day): ").split('/')]
+        tmp = [int(x) for x in input("Choose end date (year/month/day): ").split('/')]
     ts_edate = dt.datetime(tmp[0], tmp[1], tmp[2])
     
     ts_dates = [ts_sdate, ts_edate]
     
+    print ()
     #Benchmark
     benchmark_df = util.get_data([tr_symbol], pd.date_range(tr_dates[0], tr_dates[1]), addSPY=False).dropna()
         
@@ -79,7 +88,7 @@ if __name__ == "__main__":
     benchmark_trades_df = pd.DataFrame(data=[(benchmark_df.index.min(), tr_symbol, "BUY", 1000), (benchmark_df.index.max(), tr_symbol, "SELL", 1000)], columns=['Date', 'Symbol', 'Order', 'Shares'])
     benchmark_trades_df.set_index('Date', inplace=True)
 
-    print ("Benchmark portfolio created...")
+    print ("Benchmark portfolio created...\n")
     
     tmp = input("Use genetic algorithm to optimize signal weights? (Y/N): ")
     start_ga = tmp.lower() == "y"
@@ -87,6 +96,7 @@ if __name__ == "__main__":
     params = False
     #gen_alg = ga.GeneticAlgorithm(symbol=symbol, dates=dates, start_val=start_val, verbose=True)
     #params, sharpe_ratio = gen_alg.start_ga()
+    print ()
     
     #pdb.set_trace()
     print ("Strategy Generation")
