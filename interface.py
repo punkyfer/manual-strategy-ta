@@ -9,6 +9,7 @@ import GeneticAlgorithm as ga
 import ManualStrategy as ms
 import ManualStrategyTicktoTick as mst
 
+# TODO NOW: Fix marketsim error when called from interface
 # TODO: Implement genetic algorithm selected case
 # TODO: Make amount bought by benchmark relative to the start_val
 
