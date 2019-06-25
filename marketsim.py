@@ -10,6 +10,8 @@ import numpy as np
 import datetime as dt
 from util import get_data, normalize_data, get_portfolio_stats
 import matplotlib.pyplot as plt
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
 
 import pdb
 
@@ -43,7 +45,7 @@ def compute_portvals(df_orders, start_val = 1000000, commission=9.95, impact=0.0
     
     portvals = values_df.sum(axis=1)
 
-    rv = pd.DataFrame(index=portvals.index, data=portvals.as_matrix())
+    rv = pd.DataFrame(index=portvals.index, data=portvals.to_numpy())
     
     #pdb.set_trace()
 
@@ -74,7 +76,7 @@ def compute_portvals_ga_train(df_orders, df, start_val = 1000000, commission=9.9
     
     portvals = values_df.sum(axis=1)
 
-    rv = pd.DataFrame(index=portvals.index, data=portvals.as_matrix())
+    rv = pd.DataFrame(index=portvals.index, data=portvals.to_numpy())
     
     #pdb.set_trace()
 
@@ -241,21 +243,21 @@ def test_code():
     cum_ret_SPY, avg_daily_ret_SPY, std_daily_ret_SPY, sharpe_ratio_SPY = [0.2,0.01,0.02,1.5]
 
     # Compare portfolio against $SPX
-    print "Date Range: {} to {}".format(dates[0], dates[1])
-    print
-    print "Sharpe Ratio of Fund: {}".format(sharpe_ratio)
-    print "Sharpe Ratio of SPY : {}".format(sharpe_ratio_SPY)
-    print
-    print "Cumulative Return of Fund: {}".format(cum_ret)
-    print "Cumulative Return of SPY : {}".format(cum_ret_SPY)
-    print
-    print "Standard Deviation of Fund: {}".format(std_daily_ret)
-    print "Standard Deviation of SPY : {}".format(std_daily_ret_SPY)
-    print
-    print "Average Daily Return of Fund: {}".format(avg_daily_ret)
-    print "Average Daily Return of SPY : {}".format(avg_daily_ret_SPY)
-    print
-    print "Final Portfolio Value: {}".format(portvals[-1])
+    print ("Date Range: {} to {}".format(dates[0], dates[1]))
+    print ()
+    print ("Sharpe Ratio of Fund: {}".format(sharpe_ratio))
+    print ("Sharpe Ratio of SPY : {}".format(sharpe_ratio_SPY))
+    print ()
+    print ("Cumulative Return of Fund: {}".format(cum_ret))
+    print ("Cumulative Return of SPY : {}".format(cum_ret_SPY))
+    print ()
+    print ("Standard Deviation of Fund: {}".format(std_daily_ret))
+    print ("Standard Deviation of SPY : {}".format(std_daily_ret_SPY))
+    print ()
+    print ("Average Daily Return of Fund: {}".format(avg_daily_ret))
+    print ("Average Daily Return of SPY : {}".format(avg_daily_ret_SPY))
+    print ()
+    print ("Final Portfolio Value: {}".format(portvals[-1]))
     
 
 if __name__ == "__main__":

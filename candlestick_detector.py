@@ -139,7 +139,7 @@ if __name__ == "__main__":
     ohlc = ind.get_ohlc(df_aapl)
     for i, row in enumerate(ohlc[:-1]):
         if is_harami_cross(row, ohlc[i+1])[0]:
-            print "Found Harami Cross!"
-            print mdates.num2date(row[0]), row[1:]
-            print mdates.num2date(ohlc[i+1][0]), ohlc[i+1][1:]
+            print ("Found Harami Cross!")
+            print (mdates.num2date(row[0]), row[1:])
+            print (mdates.num2date(ohlc[i+1][0]), ohlc[i+1][1:])
     #pdb.set_trace()

@@ -10,6 +10,7 @@ import GeneticAlgorithm as ga
 import pdb
 
 #TODO: Optimize GA Algorithm
+#TODO NOW: Create rudimentary console interface
 
 class ManualStrategyTicktoTick(object):
     
@@ -259,7 +260,7 @@ if __name__ == "__main__":
     
     #pdb.set_trace()
     
-    manual_strat = ManualStrategy()
+    manual_strat = ManualStrategyTicktoTick()
     trades_df = manual_strat.testPolicy(symbol, dates=dates, start_val=start_val, ga_train=params)
     
     # Retrieve performance stats
@@ -278,7 +279,7 @@ if __name__ == "__main__":
     benchmark_trades_df = pd.DataFrame(data=[(benchmark_df.index.min(), symbol, "BUY", 1000), (benchmark_df.index.max(), symbol, "SELL", 1000)], columns=['Date', 'Symbol', 'Order', 'Shares'])
     benchmark_trades_df.set_index('Date', inplace=True)
     
-    manual_strat = ManualStrategy()
+    manual_strat = ManualStrategyTicktoTick()
     trades_df = manual_strat.testPolicy(symbol, dates=dates, start_val=start_val, ga_train=params)
     
     # Retrieve performance stats

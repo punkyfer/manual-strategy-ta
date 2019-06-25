@@ -299,7 +299,7 @@ class GeneticAlgorithm(object):
             
             #if generation % 100 == 0:
             send = time.time()
-            if self.verbose: print "Generation {} took {} seconds".format(str(generation), str(send-sstart))
+            if self.verbose: print ("Generation {} took {} seconds".format(str(generation), str(send-sstart)))
             
         #pdb.set_trace()
         # After the loop is done, find the DNA strand with highest fitness from the resulting population

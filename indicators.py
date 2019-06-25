@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.finance import candlestick_ohlc
+from mpl_finance import candlestick_ohlc
 import matplotlib.dates as mdates
 from matplotlib.lines import Line2D
 from scipy.stats import linregress
@@ -19,8 +19,8 @@ def get_bollinger_bands(df, window = 20):
         @param symbol: Symbol of the stock we want to calculate
         @param window (optional): Size of the window for "rolling" calculus
         """
-        rolling_mean = pd.rolling_mean(df, window=window)
-        rolling_std = pd.rolling_std(df, window=window)
+        rolling_mean = df.rolling(window=window).mean()
+        rolling_std = df.rolling(window=window).std()
         
         upper_band = rolling_mean + 2*rolling_std
         lower_band = rolling_mean - 2*rolling_std
@@ -28,8 +28,8 @@ def get_bollinger_bands(df, window = 20):
         return lower_band, upper_band
     
 def get_bollinger_band_values(df, window=20):
-    rolling_mean = pd.rolling_mean(df, window=window)
-    rolling_std = pd.rolling_std(df, window=window)
+    rolling_mean = df.rolling(window=window).mean()
+    rolling_std = df.rolling(window=window).std()
     bb_values = (df-rolling_mean)/(2*rolling_std)
     return bb_values
 
@@ -37,11 +37,12 @@ def get_rolling_mean(df, window=20):
     """
     @Summary: Get rolling mean for symbol in df
     """
-    return pd.rolling_mean(df, window=window)
+    return df.rolling(window=window).mean()
 
 def get_exponential_moving_average(df, window=20):
     # Get ema for symbol in df
-    return pd.ewma(df, span = window, min_periods = window - 1)
+    #return pd.ewma(df, span = window, min_periods = window - 1)
+    return df.ewm(span = window, min_periods = window - 1).mean()
 
 def get_daily_returns(df):
     daily_returns = (df / df.shift(1)) - 1
@@ -116,8 +117,8 @@ def get_trendlines(df, window=1/3.0, segments=4, charts=False):
     return strends, points
 
 def get_line_slope(line):
-    x = [range(len(line))]
-    y = line.values
+    x = [float(i) for i in range(len(line))]
+    y = [float(i) for i in line.values]
     slope, intercept, r_value, p_value, std_err = linregress(x,y)
     return slope
 

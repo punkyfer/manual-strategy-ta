@@ -9,14 +9,28 @@ import pdb
 # get_google_data source => https://mktstk.com/2014/12/31/how-to-get-free-intraday-stock-data-with-python/
 # TODO: Add function to get online daily data
 # TODO; Modify online data to save to csv, then when loading data check if csv exists first
-
-alphavantage_api = read_key('alphavantage.key')
-ts = TimeSeries(key=alphavantage_api, output_format='pandas')
-
 def read_key(filename):
   with open(filename) as f:
     fkey = f.read()
   return fkey
+
+alphavantage_api = read_key('alphavantage.key')
+ts = TimeSeries(key=alphavantage_api, output_format='pandas')
+
+def get_stocks(folder='/Data'):
+    stock_dict = {}
+    mypath =  os.path.dirname(os.path.abspath(__file__))+folder
+    for f in os.listdir(mypath):
+        if os.path.isfile(os.path.join(mypath, f)):
+            stock_dict[f.split('.')[0]]=os.path.join(mypath, f)
+    return stock_dict
+
+def get_dates(filepath):
+    df = pd.read_csv(filepath, index_col="Date", parse_dates=True, 
+            usecols=['Date','Adj Close'], na_values=['nan'])
+    start_date = df.index[0]
+    end_date = df.index[-1]
+    return start_date, end_date
 
 def symbol_to_path(symbol, base_dir="Data"):
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
